@@ -38,7 +38,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Foundation\AsyncStatus.cs" />
+    <Compile Include="Foundation\IAsyncAction.cs" />
+    <Compile Include="Foundation\IAsyncActionWithProgress.cs" />
+    <Compile Include="Foundation\IAsyncInfo.cs" />
+    <Compile Include="Foundation\IAsyncOperation.cs" />
+    <Compile Include="Foundation\IAsyncOperationWithProgress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
