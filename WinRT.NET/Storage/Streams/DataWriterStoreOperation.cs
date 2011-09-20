@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Windows.Foundation;
 
 namespace Windows.Storage.Streams
@@ -47,7 +48,7 @@ namespace Windows.Storage.Streams
 			get { throw new System.NotImplementedException(); }
 		}
 
-		public string ErrorCode
+		public Exception ErrorCode
 		{
 			get { throw new System.NotImplementedException(); }
 		}

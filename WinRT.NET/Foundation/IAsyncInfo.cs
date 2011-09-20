@@ -24,12 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+
 namespace Windows.Foundation
 {
 	public interface IAsyncInfo
 	{
 		uint Id { get; }
-		string ErrorCode { get; }
+		Exception ErrorCode { get; }
 		AsyncStatus Status { get; }
 
 		void Start();
