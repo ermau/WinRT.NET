@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 11
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRT.NET", "WinRT.NET\WinRT.NET.csproj", "{83AFCDB6-23D2-4E50-9931-A0C1CB9EA23F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRT.NET.Tests", "WinRT.NET\Tests\WinRT.NET.Tests.csproj", "{029A6DEC-9B9B-463D-A8F7-29C5CAFA2570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{029A6DEC-9B9B-463D-A8F7-29C5CAFA2570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029A6DEC-9B9B-463D-A8F7-29C5CAFA2570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029A6DEC-9B9B-463D-A8F7-29C5CAFA2570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029A6DEC-9B9B-463D-A8F7-29C5CAFA2570}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83AFCDB6-23D2-4E50-9931-A0C1CB9EA23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83AFCDB6-23D2-4E50-9931-A0C1CB9EA23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83AFCDB6-23D2-4E50-9931-A0C1CB9EA23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
