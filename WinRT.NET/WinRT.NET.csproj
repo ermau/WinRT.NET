@@ -62,6 +62,7 @@
     <Compile Include="Storage\Streams\IRandomAccessStreamStatics.cs" />
     <Compile Include="Storage\Streams\IRandomAccessStreamWithContentType.cs" />
     <Compile Include="Storage\Streams\UnicodeEncoding.cs" />
+    <Compile Include="System\WindowsRuntimeSystemExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
