@@ -61,8 +61,6 @@ namespace System
 						tcs.SetException (a.ErrorCode);
 						break;
 				}
-
-				tcs.SetResult (true);
 			};
 
 			source.Start();
