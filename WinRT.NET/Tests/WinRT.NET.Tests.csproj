@@ -46,6 +46,7 @@
     <Compile Include="MockAsyncAction.cs" />
     <Compile Include="MockAsyncBase.cs" />
     <Compile Include="MockAsyncOperation.cs" />
+    <Compile Include="Networking\HostNameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferExtensionsTests.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferTests.cs" />
