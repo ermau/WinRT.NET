@@ -32,6 +32,10 @@ namespace Windows.Storage.Streams
 	public sealed class DataReaderLoadOperation
 		: IAsyncOperation<uint>
 	{
+		internal DataReaderLoadOperation()
+		{
+		}
+
 		public AsyncOperationCompletedHandler<uint> Completed
 		{
 			get;

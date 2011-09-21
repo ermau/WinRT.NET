@@ -32,6 +32,10 @@ namespace Windows.Storage.Streams
 	public sealed class DataWriterStoreOperation
 		: IAsyncOperation<uint>
 	{
+		internal DataWriterStoreOperation()
+		{
+		}
+
 		public AsyncOperationCompletedHandler<uint> Completed
 		{
 			get;
