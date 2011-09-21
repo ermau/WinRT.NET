@@ -67,5 +67,37 @@ namespace System
 
 			return tcs.Task;
 		}
+
+		public static Task<TResult> StartAsTask<TResult> (this IAsyncOperation<TResult> source)
+		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+			if (source.Status != AsyncStatus.Created)
+				throw new InvalidOperationException ("The async operation has been previous started");
+
+			var tcs = new TaskCompletionSource<TResult>();
+
+			source.Completed = a =>
+			{
+				switch (a.Status)
+				{
+					case AsyncStatus.Completed:
+						tcs.SetResult (a.GetResults());
+						break;
+
+					case AsyncStatus.Canceled:
+						tcs.SetCanceled();
+						break;
+
+					case AsyncStatus.Error:
+						tcs.SetException (a.ErrorCode);
+						break;
+				}
+			};
+
+			source.Start();
+
+			return tcs.Task;
+		}
 	}
 }

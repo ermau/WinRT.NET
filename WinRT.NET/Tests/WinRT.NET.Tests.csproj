@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockAsyncAction.cs" />
+    <Compile Include="MockAsyncBase.cs" />
+    <Compile Include="MockAsyncOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsRuntimeSystemExtensionsTests.cs" />
   </ItemGroup>

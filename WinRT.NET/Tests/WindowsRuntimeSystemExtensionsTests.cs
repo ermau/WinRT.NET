@@ -25,10 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Windows.Foundation;
@@ -41,7 +38,7 @@ namespace WinRTNET.Tests
 		[Test]
 		public void IAsyncAction_StartAsTask_Null()
 		{
-			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeSystemExtensions.StartAsTask (null));
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeSystemExtensions.StartAsTask ((IAsyncAction)null));
 		}
 
 		[Test]
@@ -50,16 +47,16 @@ namespace WinRTNET.Tests
 			var action = new MockAsyncAction();
 
 			action.Status = AsyncStatus.Error;
-			Assert.Throws<InvalidOperationException>(() => WindowsRuntimeSystemExtensions.StartAsTask(action));
+			Assert.Throws<InvalidOperationException>(() => action.StartAsTask());
 
 			action.Status = AsyncStatus.Started;
-			Assert.Throws<InvalidOperationException>(() => WindowsRuntimeSystemExtensions.StartAsTask(action));
+			Assert.Throws<InvalidOperationException>(() => action.StartAsTask());
 
 			action.Status = AsyncStatus.Completed;
-			Assert.Throws<InvalidOperationException>(() => WindowsRuntimeSystemExtensions.StartAsTask(action));
+			Assert.Throws<InvalidOperationException>(() => action.StartAsTask());
 
 			action.Status = AsyncStatus.Canceled;
-			Assert.Throws<InvalidOperationException>(() => WindowsRuntimeSystemExtensions.StartAsTask(action));
+			Assert.Throws<InvalidOperationException>(() => action.StartAsTask());
 		}
 
 		[Test]
@@ -85,7 +82,7 @@ namespace WinRTNET.Tests
 		}
 
 		[Test]
-		public void IAsyncAction_StartAstask_Completed()
+		public void IAsyncAction_StartAsTask_Completed()
 		{
 			var action = new MockAsyncAction();
 			Task t = action.StartAsTask();
@@ -112,51 +109,80 @@ namespace WinRTNET.Tests
 			Assert.Throws<AggregateException> (() => t.Wait());
 		}
 
-		private class MockAsyncAction
-			: IAsyncAction
+		[Test]
+		public void IAsyncOperation_StartAsTask_Null()
 		{
-			public AsyncActionCompletedHandler Completed
-			{
-				get;
-				set;
-			}
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeSystemExtensions.StartAsTask ((IAsyncOperation<string>)null));
+		}
 
-			public void GetResults()
-			{
-			}
+		[Test]
+		public void IAsyncOperation_StartAsTask_CreatedOnly()
+		{
+			var operation = new MockAsyncOperation<bool>();
 
-			public uint Id
-			{
-				get;
-				set;
-			}
+			operation.Status = AsyncStatus.Error;
+			Assert.Throws<InvalidOperationException>(() => operation.StartAsTask());
 
-			public Exception ErrorCode
-			{
-				get;
-				set;
-			}
+			operation.Status = AsyncStatus.Started;
+			Assert.Throws<InvalidOperationException>(() => operation.StartAsTask());
 
-			public AsyncStatus Status
-			{
-				get;
-				set;
-			}
+			operation.Status = AsyncStatus.Completed;
+			Assert.Throws<InvalidOperationException>(() => operation.StartAsTask());
 
-			public void Start()
-			{
-				Status = AsyncStatus.Started;
-			}
+			operation.Status = AsyncStatus.Canceled;
+			Assert.Throws<InvalidOperationException>(() => operation.StartAsTask());
+		}
 
-			public void Close()
-			{
-			}
+		[Test]
+		public void IAsyncOperation_StartAsTask_StartStatus()
+		{
+			var operation = new MockAsyncOperation<bool>();
+			Task<bool> t = operation.StartAsTask();
 
-			public void Cancel()
-			{
-				Status = AsyncStatus.Canceled;
-				Completed (this);
-			}
+			Assert.AreEqual (TaskStatus.WaitingForActivation, t.Status);
+			Assert.AreEqual (AsyncStatus.Started, operation.Status);
+		}
+
+		[Test]
+		public void IAsyncOperation_StartAsTask_Canceled()
+		{
+			var action = new MockAsyncOperation<bool>();
+			Task<bool> t = action.StartAsTask();
+
+			action.Cancel();
+
+			Assert.Throws<AggregateException>(() => t.Wait());
+			Assert.AreEqual (TaskStatus.Canceled, t.Status);
+		}
+
+		[Test]
+		public void IAsyncOperation_StartAsTask_Completed()
+		{
+			var operation = new MockAsyncOperation<bool>();
+			Task<bool> t = operation.StartAsTask();
+
+			operation.Result = true;
+			operation.Status = AsyncStatus.Completed;
+			operation.Completed (operation);
+
+			Assert.AreEqual (TaskStatus.RanToCompletion, t.Status);
+			Assert.AreEqual (true, t.Result);
+		}
+
+		[Test]
+		public void IAsyncOperation_StartAsTask_Error()
+		{
+			var error = new Exception("error");
+			var operation = new MockAsyncOperation<bool>();
+			Task<bool> t = operation.StartAsTask();
+
+			operation.ErrorCode = error;
+			operation.Status = AsyncStatus.Error;
+			operation.Completed (operation);
+
+			Assert.IsTrue (t.IsFaulted);
+			Assert.AreSame (error, t.Exception.InnerExceptions.First());
+			Assert.Throws<AggregateException>(() => t.Wait());
 		}
 	}
 }
