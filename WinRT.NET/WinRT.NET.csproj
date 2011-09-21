@@ -64,6 +64,7 @@
     <Compile Include="Storage\Streams\IRandomAccessStreamWithContentType.cs" />
     <Compile Include="Storage\Streams\UnicodeEncoding.cs" />
     <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBuffer.cs" />
+    <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBufferExtensions.cs" />
     <Compile Include="System\WindowsRuntimeSystemExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
