@@ -33,7 +33,7 @@ using Windows.Storage.Streams;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-	internal sealed class WindowsRuntimeBuffer
+	public sealed class WindowsRuntimeBuffer
 		: IBuffer
 	{
 		internal WindowsRuntimeBuffer (byte[] buffer)
