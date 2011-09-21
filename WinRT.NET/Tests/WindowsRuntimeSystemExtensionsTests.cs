@@ -63,6 +63,16 @@ namespace WinRTNET.Tests
 		}
 
 		[Test]
+		public void IAsyncAction_StartAsTask_StartStatus()
+		{
+			var action = new MockAsyncAction();
+			Task t = action.StartAsTask();
+
+			Assert.AreEqual (TaskStatus.WaitingForActivation, t.Status);
+			Assert.AreEqual (AsyncStatus.Started, action.Status);
+		}
+
+		[Test]
 		public void IAsyncAction_StartAsTask_Canceled()
 		{
 			var action = new MockAsyncAction();
@@ -72,6 +82,34 @@ namespace WinRTNET.Tests
 
 			Assert.Throws<AggregateException> (() => t.Wait());
 			Assert.AreEqual (TaskStatus.Canceled, t.Status);
+		}
+
+		[Test]
+		public void IAsyncAction_StartAstask_Completed()
+		{
+			var action = new MockAsyncAction();
+			Task t = action.StartAsTask();
+
+			action.Status = AsyncStatus.Completed;
+			action.Completed (action);
+
+			Assert.AreEqual (TaskStatus.RanToCompletion, t.Status);
+		}
+
+		[Test]
+		public void IAsyncAction_StartAsTask_Error()
+		{
+			var error = new Exception ("error");
+			var action = new MockAsyncAction();
+			Task t = action.StartAsTask();
+
+			action.ErrorCode = error;
+			action.Status = AsyncStatus.Error;
+			action.Completed (action);
+
+			Assert.IsTrue (t.IsFaulted);
+			Assert.AreSame (error, t.Exception.InnerExceptions.First());
+			Assert.Throws<AggregateException> (() => t.Wait());
 		}
 
 		private class MockAsyncAction
