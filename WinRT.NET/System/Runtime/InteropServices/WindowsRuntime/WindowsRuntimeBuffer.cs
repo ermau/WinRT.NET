@@ -39,6 +39,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		internal WindowsRuntimeBuffer (byte[] buffer)
 		{
 			this.buffer = buffer;
+			this.length = (uint)buffer.Length;
 		}
 
 		public uint Capacity
