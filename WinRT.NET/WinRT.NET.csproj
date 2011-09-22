@@ -45,6 +45,7 @@
     <Compile Include="Foundation\IAsyncInfo.cs" />
     <Compile Include="Foundation\IAsyncOperation.cs" />
     <Compile Include="Foundation\IAsyncOperationWithProgress.cs" />
+    <Compile Include="Foundation\TaskAction.cs" />
     <Compile Include="Networking\Connectivity\ConnectionCost.cs" />
     <Compile Include="Networking\Connectivity\ConnectionProfile.cs" />
     <Compile Include="Networking\Connectivity\DataPlanStatus.cs" />

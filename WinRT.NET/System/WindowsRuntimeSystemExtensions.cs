@@ -36,6 +36,30 @@ namespace System
 {
 	public static class WindowsRuntimeSystemExtensions
 	{
+		internal static AsyncStatus ToAsyncStatus (this TaskStatus status)
+		{
+			switch (status)
+			{
+				case TaskStatus.Canceled:
+					return AsyncStatus.Canceled;
+
+				case TaskStatus.Faulted:
+					return AsyncStatus.Error;
+
+				case TaskStatus.RanToCompletion:
+					return AsyncStatus.Completed;
+
+				case TaskStatus.WaitingToRun:
+				case TaskStatus.WaitingForChildrenToComplete:
+				case TaskStatus.WaitingForActivation:
+				case TaskStatus.Running:
+					return AsyncStatus.Started;
+
+				default:
+					return AsyncStatus.Created;
+			}
+		}
+
 		public static Task StartAsTask (this IAsyncAction source)
 		{
 			if (source == null)
