@@ -71,12 +71,12 @@ namespace Windows.Foundation
 
 		public Exception ErrorCode
 		{
-			get { return this.task.Exception; }
+			get { return (this.task != null) ? this.task.Exception : null; }
 		}
 
 		public AsyncStatus Status
 		{
-			get { return this.task.Status.ToAsyncStatus(); }
+			get { return (this.task != null) ? this.task.Status.ToAsyncStatus() : AsyncStatus.Created; }
 		}
 
 		public void Start()

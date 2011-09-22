@@ -41,6 +41,8 @@ namespace WinRTNET.Tests
 		{
 			IAsyncInfo info = GetAsync();
 			Assert.AreEqual (AsyncStatus.Created, info.Status);
+			Assert.IsNull (info.ErrorCode);
+			Assert.Greater (info.Id, 0);
 		}
 
 		[Test]
