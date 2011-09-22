@@ -85,6 +85,7 @@ namespace Windows.Foundation
 				throw new Exception ("Action already started");
 
 			this.task = Task.Factory.StartNew (this.action, AsyncState, this.cancelSource.Token);
+			this.task.ContinueWith (t => Completed (this));
 		}
 
 		public void Close()

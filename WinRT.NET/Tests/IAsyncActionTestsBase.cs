@@ -36,7 +36,19 @@ namespace WinRTNET.Tests
 		where T : IAsyncAction
 	{
 		[Test]
-		public void AsyncStatus_CompletedInHandler()
+		public void AsyncStatus_Completed_Runs()
+		{
+			IAsyncAction action = GetAsync();
+
+			bool ran = false;
+			action.Completed = a => ran = true;
+			action.Start();
+
+			Assert.IsTrue (SpinWait.SpinUntil(() => ran, 5000));
+		}
+
+		[Test]
+		public void AsyncStatus_Completed_Status()
 		{
 			IAsyncAction action = GetAsync();
 
