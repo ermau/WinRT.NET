@@ -25,32 +25,34 @@
 // THE SOFTWARE.
 
 using System;
-using System.Threading;
+using NUnit.Framework;
+using Windows.Foundation;
 
-namespace Windows.Foundation
+namespace WinRTNET.Tests
 {
-	public interface IAsyncInfo
+	[TestFixture]
+	public class AsyncInfoTests
 	{
-		uint Id { get; }
-		Exception ErrorCode { get; }
-		AsyncStatus Status { get; }
-
-		void Start();
-		void Close();
-		void Cancel();
-	}
-
-	internal static class AsyncInfo
-	{
-		public static uint GetNextInfoId()
+		[Test]
+		public void GetNextInfoId()
 		{
-			long id = Interlocked.Increment (ref infoId);
-			if (id == UInt32.MaxValue)
-				Interlocked.CompareExchange (ref infoId, 0, id);
-
-			return (uint)id;
+			uint id = AsyncInfo.GetNextInfoId();
+			Assert.Greater (AsyncInfo.GetNextInfoId(), id);
 		}
 
-		private static long infoId;
+		[Test]
+		public void GetNextInfoId_Max()
+		{
+			uint lastId = AsyncInfo.GetNextInfoId();
+			ulong count = UInt32.MaxValue - lastId;
+			for (ulong i = 0; i < count; ++i)
+			{
+				uint next = AsyncInfo.GetNextInfoId();
+				Assert.Greater (next, lastId);
+				lastId = next;
+			}
+
+			Assert.AreEqual (1, AsyncInfo.GetNextInfoId());
+		}
 	}
 }
