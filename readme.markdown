@@ -5,7 +5,7 @@ against WinRT APIs on .NET 4 and Mono.
 
 Initial planned support
 -----------------------
- - Windows.System.Threading.*
+ - Windows.System.Threading
  - Windows.Foundation
 	- Anything async realated
  - Windows.Security.Crytography

@@ -1,5 +1,5 @@
 ﻿//
-// StreamSocket.cs
+// DataWriterTests.cs
 //
 // Author:
 //   Eric Maupin <me@ermau.com>
@@ -25,46 +25,18 @@
 // THE SOFTWARE.
 
 using System;
+using NUnit.Framework;
 using Windows.Storage.Streams;
 
-namespace Windows.Networking.Sockets
+namespace WinRTNET.Tests.Streams
 {
-	public class StreamSocket
-		: IStreamSocket
+	[TestFixture]
+	public class DataWriterTests
 	{
-		public StreamSocketControl Control
+		[Test]
+		public void Ctor_Null()
 		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public StreamSocketInformation Information
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public IInputStream InputStream
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public IOutputStream OutputStream
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public StreamSocketConnectOperation ConnectAsync (HostName hostName, string remoteServiceName, SocketProtectionLevel protectionLevel)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UpgradeToSslOperation UpgradeToSslAsync (SocketProtectionLevel protectionlevel, HostName validationHostName)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Close()
-		{
-			throw new NotImplementedException();
+			Assert.Throws<ArgumentNullException> (() => new DataWriter (null));
 		}
 	}
 }

@@ -44,37 +44,37 @@ namespace Windows.Storage.Streams
 
 		public uint GetResults()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public uint Id
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 		}
 
 		public Exception ErrorCode
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 		}
 
 		public AsyncStatus Status
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 		}
 
 		public void Start()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public void Close()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public void Cancel()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 	}
 }

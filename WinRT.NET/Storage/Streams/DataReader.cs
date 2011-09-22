@@ -24,19 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+
 namespace Windows.Storage.Streams
 {
 	public sealed class DataReader
 		: IDataReader
 	{
-		public DataReader()
+		public DataReader (IInputStream inputStream)
 		{
-			throw new System.NotImplementedException();
-		}
+			if (inputStream == null)
+				throw new ArgumentNullException ("inputStream");
 
-		public DataReader(IInputStream inputStream)
-		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public ByteOrder ByteOrder
@@ -53,7 +53,7 @@ namespace Windows.Storage.Streams
 
 		public uint UnconsumedBufferLength
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 		}
 
 		public UnicodeEncoding UnicodeEncoding
@@ -64,97 +64,97 @@ namespace Windows.Storage.Streams
 
 		public IBuffer DetachBuffer()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public IInputStream DetatchStream()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public DataReaderLoadOperation LoadAsync(uint count)
+		public DataReaderLoadOperation LoadAsync (uint count)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public bool ReadBoolean()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public IBuffer ReadBuffer()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public byte ReadByte()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void ReadBytes(out byte[] value)
+		public void ReadBytes (out byte[] value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public System.DateTimeOffset ReadDateTime()
+		public DateTimeOffset ReadDateTime()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public double ReadDouble()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public System.Guid ReadGuid()
+		public Guid ReadGuid()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public short ReadInt16()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public ushort ReadUInt16()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public int ReadInt32()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public uint ReadUInt32()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public long ReadInt64()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public ulong ReadUInt64()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public float ReadSingle()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public string ReadString()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public System.TimeSpan ReadTimeSpan()
+		public TimeSpan ReadTimeSpan()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 	}
 }

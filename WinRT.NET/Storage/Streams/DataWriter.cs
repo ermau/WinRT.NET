@@ -24,19 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
+
 namespace Windows.Storage.Streams
 {
 	public sealed class DataWriter
 		: IDataWriter
 	{
-		public DataWriter()
-		{
-			throw new System.NotImplementedException();
-		}
-
 		public DataWriter (IOutputStream outputStream)
 		{
-			throw new System.NotImplementedException();
+			if (outputStream == null)
+				throw new ArgumentNullException ("outputStream");
+
+			throw new NotImplementedException();
 		}
 
 		public ByteOrder ByteOrder
@@ -53,112 +53,112 @@ namespace Windows.Storage.Streams
 
 		public uint UnstoredBufferLength
 		{
-			get { throw new System.NotImplementedException(); }
+			get { throw new NotImplementedException(); }
 		}
 
 		public IBuffer DetatchBuffer()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public IOutputStream DetatchStream()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public uint MeasureString(string value)
+		public uint MeasureString (string value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public DataWriterStoreOperation StoreAsync()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteBoolean(bool value)
+		public void WriteBoolean (bool value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteBuffer(IBuffer value)
+		public void WriteBuffer (IBuffer value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteBuffer(IBuffer value, uint start, uint count)
+		public void WriteBuffer (IBuffer value, uint start, uint count)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteByte(byte value)
+		public void WriteByte (byte value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteBytes(byte[] value)
+		public void WriteBytes (byte[] value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteDateTime(System.DateTimeOffset value)
+		public void WriteDateTime (DateTimeOffset value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteDouble(double value)
+		public void WriteDouble (double value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteGuid(System.Guid value)
+		public void WriteGuid (Guid value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteInt16(short value)
+		public void WriteInt16 (short value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteUInt16(ushort value)
+		public void WriteUInt16 (ushort value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteInt32(int value)
+		public void WriteInt32 (int value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteUInt32(ushort value)
+		public void WriteUInt32 (ushort value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteInt64(long value)
+		public void WriteInt64 (long value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteUInt64(ulong value)
+		public void WriteUInt64 (ulong value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteSingle(float value)
+		public void WriteSingle (float value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteTimeSpan(System.TimeSpan value)
+		public void WriteTimeSpan (TimeSpan value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
-		public void WriteString(string value)
+		public void WriteString (string value)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 	}
 }
