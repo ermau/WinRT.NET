@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncInfoTests.cs" />
+    <Compile Include="IAsyncActionTestsBase.cs" />
+    <Compile Include="IAsyncInfoTestsBase.cs" />
     <Compile Include="MockAsyncAction.cs" />
     <Compile Include="MockAsyncBase.cs" />
     <Compile Include="MockAsyncOperation.cs" />
