@@ -40,14 +40,14 @@ namespace WinRTNET.Tests
 		public void AsyncStatus_AfterCreation()
 		{
 			IAsyncInfo info = GetAsync();
-			Assert.AreEqual (AsyncStatus.Created, info);
+			Assert.AreEqual (AsyncStatus.Created, info.Status);
 		}
 
 		[Test]
 		public void Close_BeforeStart()
 		{
 			IAsyncInfo info = GetAsync();
-			Assert.Throws<COMException> (info.Close);
+			Assert.Throws<Exception> (info.Close);
 		}
 
 		[Test]
@@ -56,7 +56,7 @@ namespace WinRTNET.Tests
 			IAsyncInfo info = GetAsync();
 			info.Start();
 
-			Assert.Throws<COMException>(info.Start);
+			Assert.Throws<Exception>(info.Start);
 		}
 	}
 }
