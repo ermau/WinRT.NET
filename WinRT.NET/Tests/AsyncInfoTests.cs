@@ -40,7 +40,7 @@ namespace WinRTNET.Tests
 			Assert.Greater (AsyncInfo.GetNextInfoId(), id);
 		}
 
-		[Test]
+		//[Test] Takes far too long to prove
 		public void GetNextInfoId_Max()
 		{
 			uint lastId = AsyncInfo.GetNextInfoId();
