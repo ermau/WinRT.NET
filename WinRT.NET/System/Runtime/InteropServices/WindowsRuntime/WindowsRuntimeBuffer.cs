@@ -38,13 +38,29 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 	{
 		internal WindowsRuntimeBuffer (byte[] buffer)
 		{
-			this.buffer = buffer;
+			this.Buffer = buffer;
 			this.length = (uint)buffer.Length;
+		}
+
+		internal WindowsRuntimeBuffer (byte[] buffer, int offset, int length)
+		{
+			byte[] buff = new byte[length];
+			Array.Copy (buffer, offset, buff, 0, length);
+			this.Buffer = buff;
+			this.length = (uint)length;
+		}
+
+		internal WindowsRuntimeBuffer (byte[] buffer, int offset, int length, int capacity)
+		{
+			byte[] buff = new byte[length];
+			Array.Copy (buffer, offset, buff, 0, capacity);
+			this.Buffer = buff;
+			this.length = (uint)length;
 		}
 
 		public uint Capacity
 		{
-			get { return (uint)this.buffer.Length; }
+			get { return (uint)this.Buffer.Length; }
 		}
 
 		public uint Length
@@ -52,7 +68,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 			get { return this.length; }
 			set
 			{
-				if (value > this.buffer.Length)
+				if (value > this.Buffer.Length)
 					throw new ArgumentOutOfRangeException ("value");
 
 				this.length = value;
@@ -60,6 +76,6 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		}
 
 		private uint length;
-		private readonly byte[] buffer;
+		internal readonly byte[] Buffer;
 	}
 }

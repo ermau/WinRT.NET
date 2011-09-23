@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using Windows.Storage.Streams;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
@@ -37,6 +38,37 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 				throw new ArgumentNullException ("source");
 
 			return new WindowsRuntimeBuffer (source);
+		}
+
+		public static IBuffer AsBuffer (this byte[] source, int offset, int length)
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+			if (length - offset > source.Length || offset >= source.Length)
+				throw new ArgumentOutOfRangeException ("offet");
+
+			return new WindowsRuntimeBuffer (source, offset, length);
+		}
+
+		public static IBuffer AsBuffer (this byte[] source, int offset, int length, int capacity)
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+			if (capacity < length + offset || capacity > source.Length)
+				throw new ArgumentOutOfRangeException ("capacity");
+			if (length - offset > source.Length || offset >= source.Length)
+				throw new ArgumentOutOfRangeException ("offet");
+
+			return new WindowsRuntimeBuffer (source, offset, length, capacity);
+		}
+
+		public static Stream AsStream (this IBuffer source)
+		{
+			if (source == null)
+				throw new ArgumentNullException("source");
+
+			WindowsRuntimeBuffer b = (WindowsRuntimeBuffer)source;
+			return new MemoryStream (b.Buffer, 0, (int)b.Length);
 		}
 	}
 }
