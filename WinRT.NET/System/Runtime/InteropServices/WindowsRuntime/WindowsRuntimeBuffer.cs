@@ -52,8 +52,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
 		internal WindowsRuntimeBuffer (byte[] buffer, int offset, int length, int capacity)
 		{
-			byte[] buff = new byte[length];
-			Array.Copy (buffer, offset, buff, 0, capacity);
+			byte[] buff = new byte[capacity];
+			Array.Copy (buffer, offset, buff, 0, length);
 			this.Buffer = buff;
 			this.length = (uint)length;
 		}
