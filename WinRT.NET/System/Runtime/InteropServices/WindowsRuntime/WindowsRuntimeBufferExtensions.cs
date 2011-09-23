@@ -44,7 +44,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		{
 			if (source == null)
 				throw new ArgumentNullException("source");
-			if (length - offset > source.Length || offset >= source.Length)
+			if (length + offset > source.Length || offset >= source.Length)
 				throw new ArgumentOutOfRangeException ("offet");
 
 			return new WindowsRuntimeBuffer (source, offset, length);
@@ -56,7 +56,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 				throw new ArgumentNullException("source");
 			if (capacity < length + offset || capacity > source.Length)
 				throw new ArgumentOutOfRangeException ("capacity");
-			if (length - offset > source.Length || offset >= source.Length)
+			if (length + offset > source.Length || offset >= source.Length)
 				throw new ArgumentOutOfRangeException ("offet");
 
 			return new WindowsRuntimeBuffer (source, offset, length, capacity);
@@ -65,7 +65,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		public static Stream AsStream (this IBuffer source)
 		{
 			if (source == null)
-				throw new ArgumentNullException("source");
+				throw new ArgumentNullException ("source");
 
 			WindowsRuntimeBuffer b = (WindowsRuntimeBuffer)source;
 			return new MemoryStream (b.Buffer, 0, (int)b.Length);
