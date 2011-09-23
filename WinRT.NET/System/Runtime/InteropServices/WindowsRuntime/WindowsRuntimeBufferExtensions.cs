@@ -68,7 +68,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 				throw new ArgumentNullException ("source");
 
 			WindowsRuntimeBuffer b = (WindowsRuntimeBuffer)source;
-			return new MemoryStream (b.Buffer, 0, (int)b.Length);
+			return new MemoryStream (b.Buffer, 0, (int)b.Capacity);
 		}
 	}
 }
