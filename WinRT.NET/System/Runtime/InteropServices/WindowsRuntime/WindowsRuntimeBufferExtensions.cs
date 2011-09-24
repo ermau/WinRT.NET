@@ -111,5 +111,22 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
 			Array.Copy (sbuffer.Buffer, sbuffer.Offset, dbuffer.Buffer, dbuffer.Offset, sbuffer.Length);
 		}
+
+		public static bool TryGetUnderlyingData (this IBuffer buffer, out byte[] underlyingDataArray, out int underlyingDataArrayStartOffset)
+		{
+			if (buffer == null)
+				throw new ArgumentNullException ("buffer");
+
+			underlyingDataArray = null;
+			underlyingDataArrayStartOffset = -1;
+
+			WindowsRuntimeBuffer b = (buffer as WindowsRuntimeBuffer);
+			if (b == null)
+				return false;
+
+			underlyingDataArray = b.Buffer;
+			underlyingDataArrayStartOffset = (int)b.Offset;
+			return true;
+		}
 	}
 }

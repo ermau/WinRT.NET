@@ -184,6 +184,30 @@ namespace WinRTNET.Tests.Streams
 			Assert.AreEqual(0, destination[3]);
 		}
 
+		[Test]
+		public void TryGetUnderlyingData_Invalid()
+		{
+			byte[] data; int offset;
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeBufferExtensions.TryGetUnderlyingData (null, out data, out offset));
+			
+			Assert.IsFalse (WindowsRuntimeBufferExtensions.TryGetUnderlyingData (new FakeBuffer(), out data, out offset));
+			Assert.IsNull (data);
+			Assert.AreEqual (-1, offset);
+		}
+
+		[Test]
+		public void TryGetUnderlyingData()
+		{
+			byte[] odata = new byte[] { 1, 2, 3, 4 };
+
+			IBuffer b = odata.AsBuffer (1, 3);
+
+			byte[] data; int offset;
+			Assert.IsTrue (b.TryGetUnderlyingData (out data, out offset));
+			Assert.AreSame (odata, data);
+			Assert.AreEqual (1, offset);
+		}
+
 		private class FakeBuffer
 			: IBuffer
 		{
