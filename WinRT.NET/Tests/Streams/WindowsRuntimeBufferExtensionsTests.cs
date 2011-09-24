@@ -117,6 +117,63 @@ namespace WinRTNET.Tests.Streams
 			Assert.AreEqual (3, s.Length);
 		}
 
+		[Test]
+		public void CopyTo_ByteToBuffer_Invalid()
+		{
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeBufferExtensions.CopyTo (null, new WindowsRuntimeBuffer(new byte[1])));
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeBufferExtensions.CopyTo (new byte[1], null));
+			Assert.Throws<InvalidCastException> (() => WindowsRuntimeBufferExtensions.CopyTo (new byte[1], new FakeBuffer()));
+			Assert.Throws<ArgumentException> (() => WindowsRuntimeBufferExtensions.CopyTo (new byte[6], new byte[5].AsBuffer()));
+		}
+
+		[Test]
+		public void CopyTo_ByteToBuffer()
+		{
+			byte[] source = new byte[] { 1, 2, 3 };
+			byte[] destination = new byte[4];
+
+			WindowsRuntimeBufferExtensions.CopyTo (source, destination.AsBuffer());
+			Assert.AreEqual (1, destination[0]);
+			Assert.AreEqual (2, destination[1]);
+			Assert.AreEqual (3, destination[2]);
+			Assert.AreEqual (0, destination[3]);
+		}
+
+		[Test]
+		public void CopyTo_BufferToByte_Invalid()
+		{
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeBufferExtensions.CopyTo (null, new byte[1]));
+			Assert.Throws<ArgumentNullException> (() => WindowsRuntimeBufferExtensions.CopyTo (new byte[1].AsBuffer(), null));
+			Assert.Throws<InvalidCastException> (() => WindowsRuntimeBufferExtensions.CopyTo (new FakeBuffer(), new byte[1]));
+			Assert.Throws<ArgumentException>(() => WindowsRuntimeBufferExtensions.CopyTo (new byte[6].AsBuffer(), new byte[5]));
+		}
+
+		[Test]
+		public void CopyTo_BufferToByte()
+		{
+			byte[] source = new byte[] { 1, 2, 3 };
+			byte[] destination = new byte[4];
+
+			WindowsRuntimeBufferExtensions.CopyTo(source.AsBuffer(), destination);
+			Assert.AreEqual(1, destination[0]);
+			Assert.AreEqual(2, destination[1]);
+			Assert.AreEqual(3, destination[2]);
+			Assert.AreEqual(0, destination[3]);
+		}
+
+		[Test]
+		public void CopyTo_BufferToByte_LargerCapacity()
+		{
+			byte[] source = new byte[] { 1, 2, 3 };
+			byte[] destination = new byte[4];
+
+			WindowsRuntimeBufferExtensions.CopyTo(source.AsBuffer(), destination);
+			Assert.AreEqual(1, destination[0]);
+			Assert.AreEqual(2, destination[1]);
+			Assert.AreEqual(3, destination[2]);
+			Assert.AreEqual(0, destination[3]);
+		}
+
 		private class FakeBuffer
 			: IBuffer
 		{

@@ -70,5 +70,31 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 			WindowsRuntimeBuffer b = (WindowsRuntimeBuffer)source;
 			return new MemoryStream (b.Buffer, (int)b.Offset, (int)b.Capacity);
 		}
+
+		public static void CopyTo (this byte[] source, IBuffer destination)
+		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+			if (destination == null)
+				throw new ArgumentNullException ("destination");
+			if (source.Length > destination.Capacity)
+				throw new ArgumentException ("Destination buffer not large enough to contain source buffer");
+
+			WindowsRuntimeBuffer buffer = (WindowsRuntimeBuffer)destination;
+			Array.Copy (source, buffer.Buffer, source.Length);
+		}
+
+		public static void CopyTo (this IBuffer source, byte[] destination)
+		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+			if (destination == null)
+				throw new ArgumentNullException ("destination");
+			if (source.Length > destination.Length)
+				throw new ArgumentException ("Destination buffer not large enough to contain source buffer");
+
+			WindowsRuntimeBuffer buffer = (WindowsRuntimeBuffer)source;
+			Array.Copy (buffer.Buffer, destination, buffer.Length);
+		}
 	}
 }
