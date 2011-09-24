@@ -103,7 +103,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 				throw new ArgumentNullException("source");
 			if (destination == null)
 				throw new ArgumentNullException("destination");
-			if (source.Length > destination.Length)
+			if (source.Length > destination.Capacity)
 				throw new ArgumentException("Destination buffer not large enough to contain source buffer");
 
 			WindowsRuntimeBuffer sbuffer = (WindowsRuntimeBuffer)source;
