@@ -39,28 +39,26 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		internal WindowsRuntimeBuffer (byte[] buffer)
 		{
 			this.Buffer = buffer;
-			this.length = (uint)buffer.Length;
+			this.capacity = this.length = (uint)buffer.Length;
 		}
 
 		internal WindowsRuntimeBuffer (byte[] buffer, int offset, int length)
 		{
-			byte[] buff = new byte[length];
-			Array.Copy (buffer, offset, buff, 0, length);
-			this.Buffer = buff;
-			this.length = (uint)length;
+			this.Buffer = buffer;
+			this.Offset = (uint)offset;
+			this.capacity = this.length = (uint)length;
 		}
 
 		internal WindowsRuntimeBuffer (byte[] buffer, int offset, int length, int capacity)
 		{
-			byte[] buff = new byte[capacity];
-			Array.Copy (buffer, offset, buff, 0, length);
-			this.Buffer = buff;
-			this.length = (uint)length;
+			this.Buffer = buffer;
+			this.Offset = (uint)offset;
+			this.capacity = this.length = (uint)length;
 		}
 
 		public uint Capacity
 		{
-			get { return (uint)this.Buffer.Length; }
+			get { return this.capacity; }
 		}
 
 		public uint Length
@@ -75,6 +73,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 			}
 		}
 
+		internal uint Offset;
+		private uint capacity;
 		private uint length;
 		internal readonly byte[] Buffer;
 	}

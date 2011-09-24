@@ -43,6 +43,33 @@ namespace WinRTNET.Tests.Streams
 		}
 
 		[Test]
+		public void Capacity_CtorSet()
+		{
+			byte[] array = new byte[5];
+			var buffer = new WindowsRuntimeBuffer (array, 0, 2, 4);
+
+			Assert.AreEqual (4, buffer.Capacity);
+		}
+
+		[Test]
+		public void Length()
+		{
+			byte[] array = new byte[5];
+			var buffer = new WindowsRuntimeBuffer (array);
+
+			Assert.AreEqual (5, buffer.Length);
+		}
+
+		[Test]
+		public void Length_CtorSet()
+		{
+			byte[] array = new byte[5];
+			var buffer = new WindowsRuntimeBuffer (array, 0, 3);
+
+			Assert.AreSame (3, buffer.Length);
+		}
+
+		[Test]
 		public void Length_Get()
 		{
 			byte[] array = new byte[5];
@@ -68,6 +95,33 @@ namespace WinRTNET.Tests.Streams
 			var buffer = new WindowsRuntimeBuffer (array);
 
 			Assert.Throws<ArgumentOutOfRangeException> (() => buffer.Length = 6);
+		}
+
+		[Test]
+		public void Capacity_SameAsLength_BiggerSourceArray()
+		{
+			byte[] array = new byte[6];
+			var buffer = new WindowsRuntimeBuffer (array, 0, 4);
+			
+			Assert.AreEqual (4, buffer.Capacity);
+		}
+
+		[Test]
+		public void Resize_Length_SameBuffer()
+		{
+			byte[] array = new byte[6];
+			var buffer = new WindowsRuntimeBuffer (array, 0, 1);
+
+			Assert.AreSame (array, buffer.Buffer);
+		}
+
+		[Test]
+		public void Resize_Capacity_SameBuffer()
+		{
+			byte[] array = new byte[6];
+			var buffer = new WindowsRuntimeBuffer (array, 0, 1, 5);
+
+			Assert.AreSame (array, buffer.Buffer);
 		}
 	}
 }
