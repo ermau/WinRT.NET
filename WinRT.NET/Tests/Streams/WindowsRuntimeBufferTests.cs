@@ -66,7 +66,7 @@ namespace WinRTNET.Tests.Streams
 			byte[] array = new byte[5];
 			var buffer = new WindowsRuntimeBuffer (array, 0, 3);
 
-			Assert.AreSame (3, buffer.Length);
+			Assert.AreEqual (3, buffer.Length);
 		}
 
 		[Test]
