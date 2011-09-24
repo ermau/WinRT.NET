@@ -53,7 +53,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 		{
 			this.Buffer = buffer;
 			this.Offset = (uint)offset;
-			this.capacity = this.length = (uint)length;
+			this.length = (uint)length;
+			this.capacity = (uint)capacity;
 		}
 
 		public uint Capacity
