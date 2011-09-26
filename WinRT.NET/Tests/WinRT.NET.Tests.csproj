@@ -54,6 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Streams\DataReaderTests.cs" />
     <Compile Include="Streams\DataWriterTests.cs" />
+    <Compile Include="Streams\InputStreamToStreamAdapterTests.cs" />
+    <Compile Include="Streams\OutputStreamToStreamAdapterTests.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferExtensionsTests.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferTests.cs" />
     <Compile Include="TaskActionTests.cs" />
