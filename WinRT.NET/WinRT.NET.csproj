@@ -91,6 +91,7 @@
     <Compile Include="Storage\Streams\IRandomAccessStreamStatics.cs" />
     <Compile Include="Storage\Streams\IRandomAccessStreamWithContentType.cs" />
     <Compile Include="Storage\Streams\UnicodeEncoding.cs" />
+    <Compile Include="System\IO\WindowsRuntimeStreamExtensions.cs" />
     <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBuffer.cs" />
     <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBufferExtensions.cs" />
     <Compile Include="System\Threading\ThreadPool.cs" />
