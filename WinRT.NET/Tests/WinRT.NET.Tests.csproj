@@ -58,6 +58,7 @@
     <Compile Include="Streams\OutputStreamToStreamAdapterTests.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferExtensionsTests.cs" />
     <Compile Include="Streams\WindowsRuntimeBufferTests.cs" />
+    <Compile Include="Streams\WindowsRuntimeStreamExtensionsTests.cs" />
     <Compile Include="TaskActionTests.cs" />
     <Compile Include="Windows.System\Threading\ThreadPoolTests.cs" />
     <Compile Include="WindowsRuntimeSystemExtensionsTests.cs" />

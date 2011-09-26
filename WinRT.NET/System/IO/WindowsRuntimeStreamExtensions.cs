@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using Windows.Storage.Streams;
+using Windows.System.IO;
 
 namespace System.IO
 {
@@ -35,7 +36,7 @@ namespace System.IO
 			if (source == null)
 				throw new ArgumentNullException ("source");
 
-			throw new NotImplementedException();
+			return new StreamToInputStreamAdapter (source);
 		}
 
 		public static IOutputStream AsOutputStream (this Stream source)
@@ -43,7 +44,7 @@ namespace System.IO
 			if (source == null)
 				throw new ArgumentNullException ("source");
 
-			throw new NotImplementedException();
+			return new StreamToOutputStreamAdapter (source);
 		}
 
 		public static Stream AsStream (this IInputStream source)
