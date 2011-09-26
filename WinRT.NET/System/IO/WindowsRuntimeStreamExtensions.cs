@@ -25,47 +25,72 @@
 // THE SOFTWARE.
 
 using Windows.Storage.Streams;
+
 namespace System.IO
 {
 	public static class WindowsRuntimeStreamExtensions
 	{
 		public static IInputStream AsInputStream (this Stream source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 
 		public static IOutputStream AsOutputStream (this Stream source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 
 		public static Stream AsStream (this IInputStream source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 
 		public static Stream AsStream (this IOutputStream source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 
 		public static Stream OpenRead (this IRandomAccessStream streamProvider)
 		{
+			if (streamProvider == null)
+				throw new ArgumentNullException ("streamProvider");
+
 			throw new NotImplementedException();
 		}
 
 		public static Stream OpenRead (this IRandomAccessStream source, long offset)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 		
 		public static Stream OpenWrite (this IRandomAccessStream source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 
 		public static Stream OpenWrite (this IRandomAccessStream source, long offset)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
+
 			throw new NotImplementedException();
 		}
 	}
