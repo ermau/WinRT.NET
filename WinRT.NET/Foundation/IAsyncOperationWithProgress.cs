@@ -33,6 +33,7 @@ namespace Windows.Foundation
 		: IAsyncInfo
 	{
 		AsyncOperationWithProgressCompletedHandler<TResult, TProgress> Completed { get; set; }
+		AsyncOperationProgressHandler<TResult, TProgress> Progress { get; set; }
 
 		TResult GetResults();
 	}
