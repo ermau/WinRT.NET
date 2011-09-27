@@ -1,7 +1,7 @@
 WinRT.NET
 =========
 This library is designed to enable code reuse for code written
-against WinRT APIs on .NET 4 and Mono. 
+against non-'Metro' WinRT APIs on .NET 4 and Mono. 
 
 Initial planned support
 -----------------------
