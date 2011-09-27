@@ -62,6 +62,7 @@
     <Compile Include="Streams\WindowsRuntimeStreamExtensionsTests.cs" />
     <Compile Include="TaskActionTests.cs" />
     <Compile Include="Windows.System\Threading\ThreadPoolTests.cs" />
+    <Compile Include="Windows.System\Threading\ThreadPoolTimerTests.cs" />
     <Compile Include="WindowsRuntimeSystemExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>

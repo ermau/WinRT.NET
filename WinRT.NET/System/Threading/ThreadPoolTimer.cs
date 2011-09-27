@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Windows.System.Threading
 {
@@ -33,29 +35,65 @@ namespace Windows.System.Threading
 	public sealed class ThreadPoolTimer
 		: IThreadPoolTimer
 	{
+		private ThreadPoolTimer (TimeElapsedHandler handler, TimeSpan delay, bool isPeriodic)
+		{
+			Delay = delay;
+			if (isPeriodic)
+				Period = delay;
+
+			this.handler = handler;
+
+			this.realTimer = new Timer (t =>
+			{
+				var ltimer = (ThreadPoolTimer)t;
+
+				if (!ltimer.isCanceled)
+				{
+					Task.Factory.StartNew (o =>
+					{
+						ThreadPoolTimer taskedTimer = (ThreadPoolTimer)o;
+						taskedTimer.handler (taskedTimer);
+					}, ltimer);
+				}
+			}, this, (int)delay.TotalMilliseconds, (isPeriodic) ? (int)delay.TotalMilliseconds : Timeout.Infinite);
+		}
+
 		public TimeSpan Delay
 		{
-			get { throw new NotImplementedException(); }
+			get;
+			private set;
 		}
 
 		public TimeSpan Period
 		{
-			get { throw new NotImplementedException(); }
+			get;
+			private set;
 		}
 
 		public void Cancel()
 		{
-			throw new NotImplementedException();
+			this.isCanceled = true;
+			this.realTimer.Dispose();
 		}
+
+		private volatile bool isCanceled;
+		private readonly TimeElapsedHandler handler;
+		private readonly Timer realTimer;
 
 		public static ThreadPoolTimer CreatePeriodicTimer (TimeElapsedHandler handler, TimeSpan period)
 		{
-			throw new NotImplementedException();
+			if (handler == null)
+				throw new ArgumentException ("handler");
+
+			return new ThreadPoolTimer (handler, period, isPeriodic: true);
 		}
 
 		public static ThreadPoolTimer CreateTimer (TimeElapsedHandler handler, TimeSpan delay)
 		{
-			throw new NotImplementedException();
+			if (handler == null)
+				throw new ArgumentException ("handler");
+
+			return new ThreadPoolTimer (handler, delay, isPeriodic: false);
 		}
 	}
 }
