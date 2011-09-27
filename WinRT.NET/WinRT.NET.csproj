@@ -98,7 +98,9 @@
     <Compile Include="System\IO\WindowsRuntimeStreamExtensions.cs" />
     <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBuffer.cs" />
     <Compile Include="System\Runtime\InteropServices\WindowsRuntime\WindowsRuntimeBufferExtensions.cs" />
+    <Compile Include="System\Threading\IThreadPoolTimer.cs" />
     <Compile Include="System\Threading\ThreadPool.cs" />
+    <Compile Include="System\Threading\ThreadPoolTimer.cs" />
     <Compile Include="System\Threading\WorkItemPriority.cs" />
     <Compile Include="System\WindowsRuntimeSystemExtensions.cs" />
   </ItemGroup>
