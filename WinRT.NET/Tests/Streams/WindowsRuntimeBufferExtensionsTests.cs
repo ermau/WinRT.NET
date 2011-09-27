@@ -207,21 +207,5 @@ namespace WinRTNET.Tests.Streams
 			Assert.AreSame (odata, data);
 			Assert.AreEqual (1, offset);
 		}
-
-		private class FakeBuffer
-			: IBuffer
-		{
-			public uint Capacity
-			{
-				get { return 1; }
-			}
-
-			public uint Length
-			{
-				get;
-				set;
-			}
-		}
-
 	}
 }
