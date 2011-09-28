@@ -28,8 +28,12 @@ using System;
 
 namespace Windows.Networking.Connectivity
 {
-	public class DataUsage
+	public sealed class DataUsage
 	{
+		internal DataUsage()
+		{
+		}
+
 		public uint BytesReceived
 		{
 			get { throw new NotImplementedException(); }

@@ -30,6 +30,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class ConnectionProfile
 	{
+		internal ConnectionProfile()
+		{
+		}
+
 		public bool Connected
 		{
 			get { throw new NotImplementedException(); }

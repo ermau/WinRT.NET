@@ -30,6 +30,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class DataPlanUsage
 	{
+		internal DataPlanUsage()
+		{
+		}
+
 		public DateTimeOffset LastSyncTime
 		{
 			get { throw new NotImplementedException(); }

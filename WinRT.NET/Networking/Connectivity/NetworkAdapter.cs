@@ -30,6 +30,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class NetworkAdapter
 	{
+		internal NetworkAdapter()
+		{
+		}
+
 		public ConnectionProfile ConnectedProfile
 		{
 			get { throw new NotImplementedException(); }

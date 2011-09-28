@@ -30,6 +30,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class DataPlanStatus
 	{
+		internal DataPlanStatus()
+		{
+		}
+
 		public uint? DataLimitInMegabytes
 		{
 			get { throw new NotImplementedException(); }

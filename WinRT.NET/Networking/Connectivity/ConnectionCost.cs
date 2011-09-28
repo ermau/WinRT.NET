@@ -30,6 +30,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class ConnectionCost
 	{
+		internal ConnectionCost()
+		{
+		}
+
 		public bool ApproachingDataLimit
 		{
 			get { throw new NotImplementedException(); }

@@ -25,6 +25,10 @@ namespace Windows.Networking.Connectivity
 {
 	public sealed class NetworkItem
 	{
+		internal NetworkItem()
+		{
+		}
+
 		public Guid NetworkId
 		{
 			get { throw new NotImplementedException(); }
