@@ -36,7 +36,7 @@ namespace Windows.Security.Cryptography.Core
 {
 	public sealed class HashAlgorithmProvider
 	{
-		internal HashAlgorithmProvider(string name, HashAlgorithm algorithm)
+		internal HashAlgorithmProvider (string name, HashAlgorithm algorithm)
 		{
 			this.context = algorithm;
 			AlgorithmName = name;
@@ -58,29 +58,29 @@ namespace Windows.Security.Cryptography.Core
 			throw new NotImplementedException();
 		}
 
-		public IBuffer HashData(IBuffer data)
+		public IBuffer HashData (IBuffer data)
 		{
 			if (data == null)
 				return new byte[HashLength].AsBuffer();
 
-			return this.context.ComputeHash(data.AsStream()).AsBuffer();
+			return this.context.ComputeHash (data.AsStream()).AsBuffer();
 		}
 
 		private readonly HashAlgorithm context;
 
 		public static IReadOnlyList<string> EnumerateAlgorithms()
 		{
-			return new ReadOnlyList<string>(Algorithms.Keys.ToList());
+			return new ReadOnlyList<string> (Algorithms.Keys.ToList());
 		}
 
-		public static HashAlgorithmProvider OpenAlgorithm(string algorithm)
+		public static HashAlgorithmProvider OpenAlgorithm (string algorithm)
 		{
 			if (algorithm == null)
-				throw new ArgumentNullException("algorithm");
+				throw new ArgumentNullException ("algorithm");
 
 			Func<HashAlgorithm> algCtor;
-			if (!Algorithms.TryGetValue(algorithm, out algCtor))
-				throw new COMException("Algorithm not found", -1073741275);
+			if (!Algorithms.TryGetValue (algorithm, out algCtor))
+				throw new COMException ("Algorithm not found", -1073741275);
 
 			return new HashAlgorithmProvider(algorithm, algCtor());
 		}
@@ -88,6 +88,10 @@ namespace Windows.Security.Cryptography.Core
 		private static readonly Dictionary<string, Func<HashAlgorithm>> Algorithms = new Dictionary<string, Func<HashAlgorithm>>
 		{
 			{ "MD5", () => new MD5CryptoServiceProvider() },
+			{ "SHA1", () => new SHA1CryptoServiceProvider() },
+			{ "SHA256", () => new SHA256CryptoServiceProvider() },
+			{ "SHA384", () => new SHA384CryptoServiceProvider() },
+			{ "SHA512", () => new SHA512CryptoServiceProvider() }
 		};
 	}
 }
