@@ -25,25 +25,32 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using Windows.Storage.Streams;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Windows.Security.Cryptography.Core
 {
 	public sealed class HashAlgorithmProvider
 	{
-		internal HashAlgorithmProvider()
+		internal HashAlgorithmProvider(string name, HashAlgorithm algorithm)
 		{
-			throw new NotImplementedException();
+			this.context = algorithm;
+			AlgorithmName = name;
 		}
 
 		public string AlgorithmName
 		{
-			get { throw new NotImplementedException(); }
+			get;
+			private set;
 		}
 
 		public uint HashLength
 		{
-			get { throw new NotImplementedException(); }
+			get { return (uint)this.context.HashSize / 8; }
 		}
 
 		public CryptographicHash CreateHash()
@@ -51,14 +58,36 @@ namespace Windows.Security.Cryptography.Core
 			throw new NotImplementedException();
 		}
 
-		public static IReadOnlyList<string> EnumerateAlgorithms()
+		public IBuffer HashData(IBuffer data)
 		{
-			throw new NotImplementedException();
+			if (data == null)
+				return new byte[HashLength].AsBuffer();
+
+			return this.context.ComputeHash(data.AsStream()).AsBuffer();
 		}
 
-		public static HashAlgorithmProvider OpenAlgorithm (string algorithm)
+		private readonly HashAlgorithm context;
+
+		public static IReadOnlyList<string> EnumerateAlgorithms()
 		{
-			throw new NotImplementedException();
+			return new ReadOnlyList<string>(Algorithms.Keys.ToList());
 		}
+
+		public static HashAlgorithmProvider OpenAlgorithm(string algorithm)
+		{
+			if (algorithm == null)
+				throw new ArgumentNullException("algorithm");
+
+			Func<HashAlgorithm> algCtor;
+			if (!Algorithms.TryGetValue(algorithm, out algCtor))
+				throw new COMException("Algorithm not found", -1073741275);
+
+			return new HashAlgorithmProvider(algorithm, algCtor());
+		}
+
+		private static readonly Dictionary<string, Func<HashAlgorithm>> Algorithms = new Dictionary<string, Func<HashAlgorithm>>
+		{
+			{ "MD5", () => new MD5CryptoServiceProvider() },
+		};
 	}
 }
