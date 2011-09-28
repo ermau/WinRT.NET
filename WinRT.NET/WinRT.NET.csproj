@@ -96,6 +96,8 @@
     <Compile Include="Storage\Streams\IRandomAccessStreamStatics.cs" />
     <Compile Include="Storage\Streams\IRandomAccessStreamWithContentType.cs" />
     <Compile Include="Storage\Streams\UnicodeEncoding.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyList.cs" />
+    <Compile Include="System\Collections\Generic\ReadOnlyList.cs" />
     <Compile Include="System\IO\InputStreamToStreamAdapter.cs" />
     <Compile Include="System\IO\OutputStreamToStreamAdapter.cs" />
     <Compile Include="System\IO\StreamToInputStreamAdapter.cs" />
