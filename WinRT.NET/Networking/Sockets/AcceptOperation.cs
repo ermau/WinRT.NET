@@ -32,6 +32,10 @@ namespace Windows.Networking.Sockets
 	public sealed class AcceptOperation
 		: IAsyncOperation<StreamSocket>
 	{
+		internal AcceptOperation()
+		{
+		}
+
 		public AsyncOperationCompletedHandler<StreamSocket> Completed
 		{
 			get;

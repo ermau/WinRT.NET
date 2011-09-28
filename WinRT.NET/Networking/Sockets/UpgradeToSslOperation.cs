@@ -32,6 +32,10 @@ namespace Windows.Networking.Sockets
 	public sealed class UpgradeToSslOperation
 		: IAsyncAction
 	{
+		internal UpgradeToSslOperation()
+		{
+		}
+
 		public AsyncActionCompletedHandler Completed
 		{
 			get;
