@@ -77,8 +77,12 @@
     <Compile Include="Security\Cryptography\BinaryStringEncoding.cs" />
     <Compile Include="Security\Cryptography\Core\CipherChainingMode.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicAlgorithmClass.cs" />
+    <Compile Include="Security\Cryptography\Core\CryptographicHash.cs" />
+    <Compile Include="Security\Cryptography\Core\CryptographicKey.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicKeyCapabilities.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicPadding.cs" />
+    <Compile Include="Security\Cryptography\Core\HashAlgorithmProvider.cs" />
+    <Compile Include="Security\Cryptography\Core\SupportedKeyLengths.cs" />
     <Compile Include="Storage\Streams\ByteOrder.cs" />
     <Compile Include="Storage\Streams\DataReader.cs" />
     <Compile Include="Storage\Streams\DataReaderLoadOperation.cs" />
