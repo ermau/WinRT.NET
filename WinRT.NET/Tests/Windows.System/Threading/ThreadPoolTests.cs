@@ -45,7 +45,6 @@ namespace WinRTNET.Tests.Windows.System.Threading
 		[Test]
 		public void RunAsync_Completed()
 		{
-
 			bool handlerCompleted = false, actionCompleted = false;
 
 			IAsyncAction action = null;
@@ -57,12 +56,14 @@ namespace WinRTNET.Tests.Windows.System.Threading
 
 			action.Completed = a =>
 			{
-				Assert.AreEqual(AsyncStatus.Canceled, a.Status);
+				Assert.AreEqual (AsyncStatus.Completed, a.Status);
 				actionCompleted = true;
 			};
 
 			action.Start();
-			Assert.IsTrue (!SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
+			Assert.IsTrue (SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
+			Assert.AreEqual (AsyncStatus.Completed, action.Status);
+			Assert.IsNull (action.ErrorCode);
 		}
 
 		[Test]
@@ -90,6 +91,8 @@ namespace WinRTNET.Tests.Windows.System.Threading
 			action.Cancel();
 
 			Assert.IsTrue (!SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
+			Assert.AreEqual (AsyncStatus.Canceled, action.Status);
+			Assert.IsNull (action.ErrorCode);
 		}
 
 		[Test]
