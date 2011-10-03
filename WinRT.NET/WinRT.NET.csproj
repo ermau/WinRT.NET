@@ -78,6 +78,7 @@
     <Compile Include="Security\Cryptography\Core\AsymmetricKeyAlgorithmProvider.cs" />
     <Compile Include="Security\Cryptography\Core\CipherChainingMode.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicAlgorithmClass.cs" />
+    <Compile Include="Security\Cryptography\Core\CryptographicExtensions.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicHash.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicKey.cs" />
     <Compile Include="Security\Cryptography\Core\CryptographicKeyCapabilities.cs" />
