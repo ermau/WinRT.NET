@@ -70,7 +70,7 @@ namespace Windows.Security.Cryptography.Core
 
 		public static IReadOnlyList<string> EnumerateAlgorithms()
 		{
-			return new ReadOnlyList<string> (Algorithms.Keys.ToList());
+			return new ReadOnlyList<string> (AlgorithmNames);
 		}
 
 		public static HashAlgorithmProvider OpenAlgorithm (string algorithm)
@@ -82,7 +82,7 @@ namespace Windows.Security.Cryptography.Core
 			if (!Algorithms.TryGetValue (algorithm, out algCtor))
 				throw new COMException ("Algorithm not found", -1073741275);
 
-			return new HashAlgorithmProvider(algorithm, algCtor());
+			return new HashAlgorithmProvider (algorithm, algCtor());
 		}
 
 		private static readonly Dictionary<string, Func<HashAlgorithm>> Algorithms = new Dictionary<string, Func<HashAlgorithm>>
@@ -93,5 +93,7 @@ namespace Windows.Security.Cryptography.Core
 			{ "SHA384", () => new SHA384CryptoServiceProvider() },
 			{ "SHA512", () => new SHA512CryptoServiceProvider() }
 		};
+
+		private static readonly string[] AlgorithmNames = Algorithms.Keys.ToArray();
 	}
 }
