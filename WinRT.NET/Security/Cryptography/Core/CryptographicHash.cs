@@ -25,18 +25,26 @@
 // THE SOFTWARE.
 
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using Windows.Storage.Streams;
 
 namespace Windows.Security.Cryptography.Core
 {
 	public sealed class CryptographicHash
 	{
-		internal CryptographicHash()
+		internal CryptographicHash (HashAlgorithm algorithm)
 		{
+			this.context = algorithm;
 		}
 
 		public void Append (IBuffer Data)
 		{
+			if (Data == null)
+				return;
+
+			WindowsRuntimeBuffer buffer = (WindowsRuntimeBuffer)Data;
+
 			throw new NotImplementedException();
 		}
 
@@ -44,5 +52,7 @@ namespace Windows.Security.Cryptography.Core
 		{
 			throw new NotImplementedException();
 		}
+
+		private HashAlgorithm context;
 	}
 }

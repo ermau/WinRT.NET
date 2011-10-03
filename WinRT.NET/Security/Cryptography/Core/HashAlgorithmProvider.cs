@@ -55,7 +55,7 @@ namespace Windows.Security.Cryptography.Core
 
 		public CryptographicHash CreateHash()
 		{
-			throw new NotImplementedException();
+			throw new NotSupportedException();
 		}
 
 		public IBuffer HashData (IBuffer data)

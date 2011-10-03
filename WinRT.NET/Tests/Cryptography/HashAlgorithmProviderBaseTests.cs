@@ -84,6 +84,44 @@ namespace WinRTNET.Tests.Cryptography
 			Assert.AreEqual (provider.HashLength, buffer.Capacity);
 		}
 
+		[Test]
+		public void CreateHash_NotSupported()
+		{
+			var alg = OpenAlgorithm();
+			Assert.Throws<NotSupportedException>(() => alg.CreateHash());
+		}
+
+		//[Test]
+		public void CreateHash()
+		{
+			CryptographicHash hash = OpenAlgorithm().CreateHash();
+			Assert.IsNotNull (hash);
+		}
+
+		//[Test]
+		public void CryptographicHash_GetValue_Empty()
+		{
+			CryptographicHash hash = OpenAlgorithm().CreateHash();
+			IBuffer buffer = hash.GetValue();
+
+			byte[] data; int offset;
+			Assert.IsFalse (buffer.TryGetUnderlyingData (out data, out offset));
+		}
+
+		//[Test]
+		public void CryptographicHash_Append_Null()
+		{
+			CryptographicHash hash = OpenAlgorithm().CreateHash();
+			Assert.DoesNotThrow (() => hash.Append (null));
+		}
+
+		//[Test]
+		public void CryptographicHash_Append_FakeBuffer()
+		{
+			CryptographicHash hash = OpenAlgorithm().CreateHash();
+			Assert.Throws<InvalidCastException> (() => hash.Append (new FakeBuffer()));
+		}
+
 		private HashAlgorithmProvider OpenAlgorithm()
 		{
 			return HashAlgorithmProvider.OpenAlgorithm (Name);
