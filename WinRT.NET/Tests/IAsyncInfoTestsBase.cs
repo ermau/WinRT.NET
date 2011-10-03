@@ -26,6 +26,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NUnit.Framework;
 using Windows.Foundation;
 
@@ -58,7 +59,17 @@ namespace WinRTNET.Tests
 			IAsyncInfo info = GetAsync();
 			info.Start();
 
-			Assert.Throws<Exception>(info.Start);
+			Assert.Throws<Exception> (info.Start);
+		}
+
+		[Test]
+		public void Cancel_Started()
+		{
+			IAsyncInfo info = GetAsync();
+			info.Start();
+
+			info.Cancel();
+			Assert.IsTrue (SpinWait.SpinUntil (() => info.Status == AsyncStatus.Canceled, 1000));
 		}
 	}
 }
