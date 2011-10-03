@@ -25,61 +25,106 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Windows.Storage.Streams;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Windows.Security.Cryptography.Core
 {
 	public sealed class SymmetricKeyAlgorithmProvider
 	{
-		internal SymmetricKeyAlgorithmProvider ()
+		internal SymmetricKeyAlgorithmProvider (string name, SymmetricAlgorithm algorithm)
 		{
+			AlgorithmName = name;
+			this.context = algorithm;
+
+			KeySizes s = algorithm.LegalKeySizes[0];
+			
+			SupportedKeyLengths = new SupportedKeyLengths
+			{
+				Increment = (uint)s.SkipSize,
+				Max = (uint)s.MaxSize,
+				Min = (uint)s.MinSize
+			};
 		}
 
 		public string AlgorithmName
 		{
-			get { throw new NotImplementedException(); }
+			get;
+			private set;
 		}
 
 		public uint BlockLength
 		{
-			get { throw new NotImplementedException(); }
+			get { return (uint)this.context.BlockSize; }
 		}
 
 		public CipherChainingMode CipherChainingMode
 		{
-			get { throw new NotImplementedException(); }
+			get { return this.context.Mode.ToChainingMode(); }
 		}
 
 		public CryptographicPadding Padding
 		{
-			get { throw new NotImplementedException(); }
+			get { return (this.context.Padding == PaddingMode.PKCS7) ? CryptographicPadding.Block : CryptographicPadding.None; }
 		}
 
 		public SupportedKeyLengths SupportedKeyLengths
 		{
-			get { throw new NotImplementedException(); }
+			get;
+			private set;
 		}
 
 		public CryptographicKey CreateSymmetricKey (IBuffer keyMaterial)
 		{
+			if (keyMaterial == null)
+				throw new COMException ("Invalid key material", -1073741811);
+
+			WindowsRuntimeBuffer buffer = (WindowsRuntimeBuffer)keyMaterial;
+
 			throw new NotImplementedException();
 		}
 
 		public CryptographicKey ImportKey (IBuffer keyBlob)
 		{
+			if (keyBlob == null)
+				throw new COMException ("Invalid key blob", -1073741811);
+
+			WindowsRuntimeBuffer buffer = (WindowsRuntimeBuffer)keyBlob;
+
 			throw new NotImplementedException();
 		}
 
+		private SymmetricAlgorithm context;
+
 		public static SymmetricKeyAlgorithmProvider OpenAlgorithm (string algorithm)
 		{
-			throw new NotImplementedException();
+			if (algorithm == null)
+				throw new ArgumentNullException();
+
+			Func<SymmetricAlgorithm> factory;
+			if (!Algorithms.TryGetValue (algorithm, out factory))
+				throw new COMException ("Algorithm not found", -1073741275);
+
+			return new SymmetricKeyAlgorithmProvider (algorithm, factory());
 		}
 
 		public static IReadOnlyList<string> EnumerateAlgorithms()
 		{
-			throw new NotImplementedException();
+			return new ReadOnlyList<string> (AlgorithmNames);
 		}
+
+		private static readonly Dictionary<string, Func<SymmetricAlgorithm>> Algorithms = new Dictionary<string, Func<SymmetricAlgorithm>>
+		{
+			{ "AES_CBC", () => { var a = new AesCryptoServiceProvider(); a.Mode = CipherMode.CBC; a.Padding = PaddingMode.None; return a; } },
+			{ "AES_ECB", () => { var a = new AesCryptoServiceProvider(); a.Mode = CipherMode.ECB; a.Padding = PaddingMode.None; return a; } },
+			{ "AES_CBC_PKCS7", () => { var a = new AesCryptoServiceProvider(); a.Mode = CipherMode.CBC; a.Padding = PaddingMode.PKCS7; return a; } },
+			{ "AES_ECB_PKCS7", () => { var a = new AesCryptoServiceProvider(); a.Mode = CipherMode.ECB; a.Padding = PaddingMode.PKCS7; return a; } },
+		};
+
+		private static readonly string[] AlgorithmNames = Algorithms.Keys.ToArray();
 	}
 }

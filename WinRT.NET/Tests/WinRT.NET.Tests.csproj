@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncInfoTests.cs" />
+    <Compile Include="Cryptography\AESProviderTests.cs" />
     <Compile Include="Cryptography\HashAlgorithmProviderBaseTests.cs" />
     <Compile Include="Cryptography\HashAlgorithmProviderTests.cs" />
     <Compile Include="Cryptography\MD5ProviderTests.cs" />
     <Compile Include="Cryptography\SHAProviderTests.cs" />
+    <Compile Include="Cryptography\SymmetricKeyAlgorithmProviderBaseTests.cs" />
+    <Compile Include="Cryptography\SymmetricKeyAlgorithmProviderTests.cs" />
     <Compile Include="IAsyncActionTestsBase.cs" />
     <Compile Include="IAsyncInfoTestsBase.cs" />
     <Compile Include="MockAsyncAction.cs" />
