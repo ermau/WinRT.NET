@@ -45,6 +45,8 @@ namespace WinRTNET.Tests
 			action.Start();
 
 			Assert.IsTrue (SpinWait.SpinUntil(() => ran, 5000));
+			Assert.AreEqual (AsyncStatus.Completed, action.Status);
+			Assert.IsNull (action.ErrorCode);
 		}
 
 		[Test]
