@@ -50,7 +50,7 @@ namespace WinRTNET.Tests.Windows.System.Threading
 			IAsyncAction action = null;
 			action = ThreadPool.RunAsync(a =>
 			{
-				Assert.AreEqual(AsyncStatus.Started, a.Status);
+				Assert.AreEqual (AsyncStatus.Started, a.Status);
 				handlerCompleted = true;
 			});
 
@@ -61,7 +61,7 @@ namespace WinRTNET.Tests.Windows.System.Threading
 			};
 
 			action.Start();
-			Assert.IsTrue (SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
+			Assert.IsTrue (SpinWait.SpinUntil (() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
 			Assert.AreEqual (AsyncStatus.Completed, action.Status);
 			Assert.IsNull (action.ErrorCode);
 		}
@@ -74,9 +74,9 @@ namespace WinRTNET.Tests.Windows.System.Threading
 			IAsyncAction action = null;
 			action = ThreadPool.RunAsync (a =>
 			{
-				Assert.AreEqual(AsyncStatus.Started, a.Status);
+				Assert.AreEqual (AsyncStatus.Started, a.Status);
 				handlerCompleted = true;
-				Thread.Sleep (5000);
+				Thread.Sleep (2000);
 			});
 
 			action.Completed = a =>
@@ -90,7 +90,7 @@ namespace WinRTNET.Tests.Windows.System.Threading
 			Assert.IsTrue (SpinWait.SpinUntil(() => handlerCompleted, 1000));
 			action.Cancel();
 
-			Assert.IsTrue (!SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 5000));
+			Assert.IsTrue (SpinWait.SpinUntil(() => handlerCompleted && actionCompleted, millisecondsTimeout: 4000));
 			Assert.AreEqual (AsyncStatus.Canceled, action.Status);
 			Assert.IsNull (action.ErrorCode);
 		}
