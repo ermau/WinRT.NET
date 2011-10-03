@@ -45,7 +45,12 @@ namespace WinRTNET.Tests
 			IAsyncAction action = new TaskAction (() => Thread.Sleep (1000));
 
 			bool completed = false;
-			action.Completed = a => completed = true;
+			action.Completed = a =>
+			{
+				Assert.AreEqual (AsyncStatus.Canceled, a.Status);
+				completed = true;
+			};
+
 			action.Start();
 
 			action.Cancel();
