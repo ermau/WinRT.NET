@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Threading;
 using NUnit.Framework;
 using Windows.Foundation;
 
@@ -36,6 +37,21 @@ namespace WinRTNET.Tests
 		protected override TaskAction GetAsync()
 		{
 			return new TaskAction (() => "do nothing".ToString());
+		}
+
+		[Test]
+		public void AsyncStatus_Completed_Canceled()
+		{
+			IAsyncAction action = new TaskAction (() => Thread.Sleep (1000));
+
+			bool completed = false;
+			action.Completed = a => completed = true;
+			action.Start();
+
+			action.Cancel();
+
+			Assert.IsTrue (SpinWait.SpinUntil(() => completed, 5000));
+			Assert.AreEqual (AsyncStatus.Canceled, action.Status);
 		}
 	}
 }

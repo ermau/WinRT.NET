@@ -76,7 +76,15 @@ namespace Windows.Foundation
 
 		public AsyncStatus Status
 		{
-			get { return (this.task != null) ? this.task.Status.ToAsyncStatus() : AsyncStatus.Created; }
+			get
+			{
+				if (this.task == null)
+					return AsyncStatus.Created;
+				if (this.cancelSource.IsCancellationRequested)
+					return AsyncStatus.Canceled;
+
+				return this.task.Status.ToAsyncStatus();
+			}
 		}
 
 		public void Start()
