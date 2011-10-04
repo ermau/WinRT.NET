@@ -54,7 +54,7 @@ namespace WinRTNET.Tests.Cryptography
 	{
 		public override string Name
 		{
-			get { return "AES_EBC"; }
+			get { return "AES_ECB"; }
 		}
 
 		public override CryptographicPadding Padding
